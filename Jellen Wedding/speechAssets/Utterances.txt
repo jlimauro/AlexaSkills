@@ -1,0 +1,17 @@
+GetWeddingDateIntentSelf what day is my wedding
+GetWeddingDateIntentSelf when is my wedding
+GetWeddingDateIntent when is Jeffrey's' wedding
+GetWeddingDateIntent when is Ellen's' wedding
+GetWeddingDateIntent when is Jellen's' wedding
+GetWeddingDateCountDownIntent how many days till my wedding
+GetWeddingDateCountDownIntent wedding count down
+GetWeddingDateCountDownIntent how long till wedding
+GetWeddingDateCountDownIntent how many days
+GetWeddingDateCountDownIntent how long till my wedding
+GetWeddingDateCountDownIntent how many days left
+GetWeddingDateCountDownIntent how many days left till Ellen's' wedding
+GetWeddingDateCountDownIntent how many days left till Jeffrey's' wedding
+GetWeddingDateCountDownIntent how many days left till Jellen's' wedding
+GetShanaWeddingDate when is wedding for Shana
+GetShanaWeddingDate when is Shana's' wedding
+GetDaysTilShanaWedding how many days till Shana's' wedding
