@@ -1,0 +1,31 @@
+{
+  "intents": [
+    {
+      "intent": "GetWeddingDateIntent"
+    },
+    {
+      "intent": "GetWeddingDateIntentSelf"
+    },
+    {
+      "intent": "GetWeddingDateCountDownIntent"
+    },
+    {
+      "intent": "GetWeddingDateCountDownIntentSelf"
+    },
+    {
+      "intent": "GetShanaWeddingDate"
+    },
+    {
+      "intent": "GetDaysTilShanaWedding"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}
