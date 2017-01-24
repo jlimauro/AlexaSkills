@@ -1,22 +1,22 @@
 {
   "intents": [
     {
-      "intent": "GetWeddingDateIntent"
+      "intent": "GetWeddingDateIntent",
+      "slots": [
+        {
+          "name":"Name",
+          "type":"PersonType"
+        }
+      ]
     },
     {
-      "intent": "GetWeddingDateIntentSelf"
-    },
-    {
-      "intent": "GetWeddingDateCountDownIntent"
-    },
-    {
-      "intent": "GetWeddingDateCountDownIntentSelf"
-    },
-    {
-      "intent": "GetShanaWeddingDate"
-    },
-    {
-      "intent": "GetDaysTilShanaWedding"
+      "intent": "GetWeddingDateCountDownIntent",
+      "slots": [
+        {
+          "name":"Name",
+          "type":"PersonType"
+        }
+      ]
     },
     {
       "intent": "AMAZON.HelpIntent"
