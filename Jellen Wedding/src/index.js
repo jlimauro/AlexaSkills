@@ -1,11 +1,7 @@
-/* eslint-disable  func-names */
-/* eslint quote-props: ["error", "consistent"]*/
 /**
- * This sample demonstrates a simple skill built with the Amazon Alexa Skills
- * nodejs skill development kit.
- * This sample supports multiple lauguages. (en-US).
- * The Intent Schema, Custom Slots and Sample Utterances for this skill, as well
- * as testing instructions are located at https://github.com/alexa/skill-sample-nodejs-fact
+Jeffrey Limauro 
+
+Alexa skill Jellen Wedding invocation wedding info
  **/
 
 'use strict';
