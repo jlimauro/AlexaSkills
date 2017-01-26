@@ -56,7 +56,7 @@ var getDaysLeft = function(IsShana) {
 
 const handlers = {
     'LaunchRequest': function() {
-        this.emit('GetDate', 'my');
+        this.emit('GetDateCountDown', 'my');
     },
     'GetWeddingDateIntent': function() {
 
