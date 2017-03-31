@@ -1,5 +1,6 @@
 /**
 Jeffrey Limauro 
+LimauroDev Software
 
 Alexa skill Jellen Wedding invocation wedding info
  **/
@@ -33,10 +34,16 @@ const languageStrings = {
     },
 };
 
-var getDaysLeft = function(IsShana) {
+var getDaysLeft = function(index) {
 
-    if (IsShana === true) {
+    if (index == 1) {
         var weddingDate = new Date("07/14/2017");
+        var currentDate = new Date();
+        var timeDiff = weddingDate - currentDate;
+        var diffDays = Math.round(timeDiff / (1000 * 60 * 60 * 24));
+        return diffDays;
+    } else if (index == 2) {
+        var weddingDate = new Date("09/29/2018");
         var currentDate = new Date();
         var timeDiff = weddingDate - currentDate;
         var diffDays = Math.round(timeDiff / (1000 * 60 * 60 * 24));
@@ -112,6 +119,10 @@ var getDateHandlers = {
                 // Create speech output for Shana and David
                 speechOutput = "Shana and David's wedding date is July 14, 2017";
                 this.emit(':tell', speechOutput);
+            } else if (personItem.includes('eric') || personItem.includes('katie')) {
+                // Create speech output for Shana and David
+                speechOutput = "Eric and Katie's wedding date is September 29, 2018";
+                this.emit(':tell', speechOutput);
             } else {
                 speechOutput = this.t('ErrMessage');
                 this.emit(':tell', speechOutput);
@@ -128,7 +139,7 @@ var getDateHandlers = {
         if (personItem !== null) {
             if (personItem === 'my') {
 
-                var diffDays = getDaysLeft(false);
+                var diffDays = getDaysLeft(0);
 
                 if (diffDays > 1) {
                     speechOutput = this.t('COUNTDOWN_MESSAGEpStart') + diffDays + this.t('COUNTDOWN_MESSAGEpEnd_Self');
@@ -141,7 +152,7 @@ var getDateHandlers = {
                 this.emit(':tell', speechOutput);
 
             } else if (personItem.includes('jeff') || personItem.includes('ellen') || personItem.includes('jellen')) {
-                var diffDays = getDaysLeft(false);
+                var diffDays = getDaysLeft(0);
 
                 if (diffDays > 1) {
                     speechOutput = this.t('COUNTDOWN_MESSAGEpStart') + diffDays + this.t('COUNTDOWN_MESSAGEpEnd');
@@ -152,9 +163,10 @@ var getDateHandlers = {
                 }
 
                 this.emit(':tell', speechOutput);
+
             } else if (personItem.includes('shan') || personItem.includes('david')) {
 
-                var diffDays = getDaysLeft(true);
+                var diffDays = getDaysLeft(1);
 
                 if (diffDays > 1) {
                     speechOutput = "There are: " + diffDays + " days till Shana and David's wedding";
@@ -163,8 +175,21 @@ var getDateHandlers = {
                 } else {
                     speechOutput = "Today is Shana and David's wedding!";
                 }
-
                 this.emit(':tell', speechOutput);
+
+            } else if (personItem.includes('eric') || personItem.includes('katie')) {
+
+                var diffDays = getDaysLeft(2);
+
+                if (diffDays > 1) {
+                    speechOutput = "There are: " + diffDays + " days till Eric and Katie's wedding";
+                } else if (diffDays == 1) {
+                    speechOutput = "There is: " + diffDays + " day till Eric and Katie's wedding";
+                } else {
+                    speechOutput = "Today is till Eric and Katie's wedding!";
+                }
+                this.emit(':tell', speechOutput);
+                
             } else {
                 speechOutput = this.t('ErrMessage');
                 this.emit(':tell', speechOutput);
