@@ -19,6 +19,15 @@
       ]
     },
     {
+      "intent": "GetMarriageDateCountIntent",
+      "slots": [
+        {
+          "name":"Name",
+          "type":"PersonType"
+        }
+      ]
+    },
+    {
       "intent": "AMAZON.HelpIntent"
     },
     {
