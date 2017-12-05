@@ -1,0 +1,40 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "Name",
+          "type": "PersonType"
+        }
+      ],
+      "intent": "GetWeddingDateIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "Name",
+          "type": "PersonType"
+        }
+      ],
+      "intent": "GetWeddingDateCountDownIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "Name",
+          "type": "PersonType"
+        }
+      ],
+      "intent": "GetMarriageDateCountIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}

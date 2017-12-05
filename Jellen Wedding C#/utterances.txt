@@ -1,0 +1,10 @@
+GetWeddingDateIntent what day is {Name} wedding
+GetWeddingDateIntent when is {Name} wedding
+GetWeddingDateIntent when was {Name} wedding
+GetWeddingDateCountDownIntent how many days left till {Name} wedding
+GetWeddingDateCountDownIntent how many days till {Name} wedding
+GetWeddingDateCountDownIntent how long till {Name} wedding
+GetMarriageDateCountIntent how many days have {Name} been married
+GetMarriageDateCountIntent how long has {Name} been married
+GetMarriageDateCountIntent how long have {Name} been married
+GetMarriageDateCountIntent how many days since {Name} wedding
