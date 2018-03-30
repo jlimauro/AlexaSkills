@@ -20,35 +20,38 @@ namespace JellenWeddingSkill.Controllers
         private readonly IConfiguration _config;
         private readonly string _appid;
         private readonly ISkillLogic _jellenWedding;
+        private JellenSkillResponse _skillResponse;
 
         public AlexaController(IConfiguration config, ISkillLogic JellenWeddingSkill)
         {
             _config = config;
             _jellenWedding = JellenWeddingSkill;
             _appid = _config.GetValue<string>("SkillApplicationId");
+            _skillResponse = new JellenSkillResponse();
         }
 
         [HttpPost]
-        public IActionResult HandleSkillRequest([FromBody]SkillRequest input)
+        public async Task<IActionResult> HandleSkillRequest([FromBody]SkillRequest alexaRequest)
         {
-            // Security check
-            if (input.Session.Application.ApplicationId != _appid)
+            // Security check   
+            bool result = await CheckSecurityAsync(alexaRequest);
+
+            if (!result)
                 return BadRequest();
 
-            var requestType = input.GetRequestType();
+            var requestType = alexaRequest.GetRequestType();
 
             if (requestType == typeof(IntentRequest))
             {
-                var response = HandleIntentsAsync(input);
+                var response = await HandleIntentsAsync(alexaRequest);
 
                 return Ok(response);
             }
 
             if (requestType == typeof(LaunchRequest))
             {
-                var launchResponse = _jellenWedding.GetWeddingDateCountDown(PersonType.Self);
-                var speech = new SsmlOutputSpeech { Ssml = launchResponse };
-                var finalResponse = ResponseBuilder.Tell(speech);
+                _skillResponse = _jellenWedding.GetWeddingDateCountDown(PersonType.Self);
+                SkillResponse finalResponse = ResponseBuilder.TellWithCard(_skillResponse.Speech, "Wedding Info", _skillResponse.Message);
 
                 return Ok(finalResponse);
             }
@@ -56,17 +59,27 @@ namespace JellenWeddingSkill.Controllers
             return Ok(ErrorResponse());
         }
 
+        private async Task<bool> CheckSecurityAsync(SkillRequest alexaRequest)
+        {
+            if (alexaRequest.Session.Application.ApplicationId != _appid)
+                return false;
+
+            var totalSeconds = (DateTime.UtcNow - alexaRequest.Request.Timestamp).TotalSeconds;
+            if(totalSeconds <=0 || totalSeconds > 150)
+                return false;          
+
+            return true;
+        }
+
         /// <summary>
         /// Handles different intents of the Alexa skill.
         /// </summary>
-        /// <param name="input">current skill request</param>
+        /// <param name="alexaRequest">current skill request</param>
         /// <returns></returns>
-        private SkillResponse HandleIntentsAsync(SkillRequest input)
+        private async Task<SkillResponse> HandleIntentsAsync(SkillRequest alexaRequest)
         {
-            if (!(input.Request is IntentRequest intentRequest))
+            if (!(alexaRequest.Request is IntentRequest intentRequest))
                 return ErrorResponse();
-
-            var speech = new SsmlOutputSpeech();
 
             // check the name to determine what you should do
             var intentName = intentRequest.Intent.Name;
@@ -75,18 +88,19 @@ namespace JellenWeddingSkill.Controllers
             
             if ((intentName.Equals(Intents.GetWeddingDateCountDownIntent) || intentName.Equals(Intents.GetMarriageDateCountIntent)) && person != PersonType.Unknown)
             {
-                speech.Ssml = _jellenWedding.GetWeddingDateCountDown(person);
+                _skillResponse = _jellenWedding.GetWeddingDateCountDown(person);
 
                 // create the response using the ResponseBuilder
-                var finalResponse = ResponseBuilder.Tell(speech);
+                SkillResponse finalResponse = ResponseBuilder.TellWithCard(_skillResponse.Speech, "Wedding Info", _skillResponse.Message);
                 return finalResponse;
             }
 
             if (intentName.Equals(Intents.GetWeddingDateIntent) && person != PersonType.Unknown)
             {
-                speech.Ssml = _jellenWedding.GetWeddingDate(person);
+                _skillResponse = _jellenWedding.GetWeddingDate(person);
+                
                 // create the response using the ResponseBuilder
-                var finalResponse = ResponseBuilder.Tell(speech);
+                SkillResponse finalResponse = ResponseBuilder.TellWithCard(_skillResponse.Speech, "Wedding Info", _skillResponse.Message);
                 return finalResponse;
             }
 

@@ -5,8 +5,8 @@ namespace JellenWeddingSkill.Interfaces
 {
     public interface ISkillLogic
     {
-        string GetWeddingDate(PersonType personType);
-        string GetWeddingDateCountDown(PersonType personType);
+        JellenSkillResponse GetWeddingDate(PersonType personType);
+        JellenSkillResponse GetWeddingDateCountDown(PersonType personType);
         PersonType GetPersonType(Slot soltName);
     }
 }
