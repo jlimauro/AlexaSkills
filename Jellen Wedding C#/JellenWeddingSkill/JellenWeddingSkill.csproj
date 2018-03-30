@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="alexa.net" Version="1.3.0" />
+    <PackageReference Include="alexa.net" Version="1.4.2" />
     <PackageReference Include="alexa.net.security" Version="1.0.0" />
     <PackageReference Include="alexa.net.security.middleware" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />

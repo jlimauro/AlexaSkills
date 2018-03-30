@@ -39,6 +39,13 @@ namespace JellenWeddingSkill
             // requests on all controllers will be validated, so no non-Amazon-Alexa-requests will get past this
             app.UseAlexaRequestValidation();
 
+            app.UseWhen( context => context.Request.Path.StartsWithSegments("/api/alexa"), appBuilder =>
+            {
+                /* requests on only the /api/alexa controllers will be validated, 
+                so no non-Amazon-Alexa-requests will get past this */
+                appBuilder.UseAlexaRequestValidation();
+            });
+
             app.UseMvc();
         }
     }
